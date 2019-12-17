@@ -1,12 +1,23 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.10'
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.2.2.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+	id 'com.bmuschko.docker-spring-boot-application' version '6.1.1'
+	id 'com.google.protobuf' version "0.8.10"
 }
 
 group = 'me.naiden'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '13'
+sourceCompatibility = '11'
 
 configurations {
 	developmentOnly
@@ -26,6 +37,35 @@ ext {
 	set('springBootAdminVersion', "2.2.0")
 }
 
+docker {
+	springBootApplication {
+		baseImage = 'adoptopenjdk/openjdk11:alpine'
+		ports = [9090, 8080]
+		images = ['my-pet:0.0.1','my-pet:latest']
+		jvmArgs = ['-Dspring.profiles.active=production', '-Xmx2048m']
+	}
+}
+
+sourceSets.main.java.srcDirs += 'build/generated/source/proto/main/java'
+sourceSets.main.java.srcDirs += 'build/generated/source/proto/main/grpc'
+
+protobuf {
+	protoc {
+		artifact = 'com.google.protobuf:protoc:3.11.0'
+	}
+	plugins {
+		grpc {
+			artifact = "io.grpc:protoc-gen-grpc-java:1.25.0"
+		}
+	}
+	generateProtoTasks {
+		all()*.plugins {
+			grpc {}
+		}
+	}
+}
+
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -33,6 +73,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'de.codecentric:spring-boot-admin-starter-server'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtime("com.h2database:h2:1.4.199")
+	compile 'com.google.protobuf:protobuf-java:3.10.0'
+	compile 'io.github.lognet:grpc-spring-boot-starter:3.5.0'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
