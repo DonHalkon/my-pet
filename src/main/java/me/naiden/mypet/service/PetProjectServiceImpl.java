@@ -1,23 +1,28 @@
 package me.naiden.mypet.service;
 
-import io.grpc.stub.StreamObserver;
-import me.naiden.mypet.grpc.model.GetPetProjects;
-import me.naiden.mypet.grpc.model.PetProject;
-import me.naiden.mypet.grpc.model.PetProjectServiceGrpc;
+import me.naiden.mypet.model.PetProject;
 import me.naiden.mypet.repository.PetProjectRepository;
-import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 
-@GRpcService
-public class PetProjectServiceImpl extends PetProjectServiceGrpc.PetProjectServiceImplBase implements PetProjectService {
+@Service
+public class PetProjectServiceImpl implements PetProjectService {
 
 	@Autowired
 	private PetProjectRepository petProjectRepository;
 
 	@Override
-	public void getPetProjectsList(GetPetProjects request, StreamObserver<PetProject> responseObserver) {
-		petProjectRepository.findAll().forEach(petProject -> responseObserver.onNext(petProject.toGRPC()));
-		responseObserver.onCompleted();
+	public List<PetProject> getPetProjectsList() {
+		List<PetProject> petProjects = new ArrayList<>();
+		petProjectRepository.findAll().forEach(petProjects::add);
+		return petProjects;
+	}
+
+	@Override
+	public PetProject getPetProjectByName(String petProjectName) {
+		return petProjectRepository.findByName(petProjectName);
 	}
 }

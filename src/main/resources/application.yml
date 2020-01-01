@@ -21,8 +21,8 @@ spring:
     username: sa
     password: password
 
-grpc:
-  port: 6789
+  thymeleaf:
+    enabled: false
 
 ---
 #spring:

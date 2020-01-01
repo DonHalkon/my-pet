@@ -1,11 +1,12 @@
 package me.naiden.mypet.model;
 
 import javax.persistence.Column;
-//import javax.persistence.ElementCollection;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class PetProject {
@@ -21,12 +22,12 @@ public class PetProject {
 	@Column
 	private String task;
 	@Column
-//	@ElementCollection
-	private String tests;
+	@ElementCollection
+	private List<String> tests;
 
 	public PetProject() {}
 
-	public PetProject(Long id, String name, String description, String shortDescription, String task, String tests) {
+	public PetProject(Long id, String name, String description, String shortDescription, String task, List<String> tests) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -75,25 +76,12 @@ public class PetProject {
 		this.task = task;
 	}
 
-	public String getTests() {
+	public List<String> getTests() {
 		return tests;
 	}
 
-	public void setTests(String tests) {
+	public void setTests(List<String> tests) {
 		this.tests = tests;
 	}
 
-	public me.naiden.mypet.grpc.model.PetProject toGRPC() {
-		me.naiden.mypet.grpc.model.PetProject.Builder builder = me.naiden.mypet.grpc.model.PetProject.newBuilder();
-		builder
-				.setName(this.name)
-				.setDescription(this.description)
-				.setShortDescription(this.shortDescription)
-				.setTask(this.task)
-		        .setTests(this.tests);
-//		for (int i = 0; i < this.tests.size(); i++) {
-//			builder.setTests(i, this.tests.get(i));
-//		}
-		return builder.build();
-	}
 }

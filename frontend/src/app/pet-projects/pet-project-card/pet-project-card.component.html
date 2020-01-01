@@ -1,0 +1,22 @@
+<mdb-card>
+    <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+        <!-- Card img -->
+        <mdb-card-img src="https://mdbootstrap.com/img/Photos/Others/images/15.jpg" alt="Card image cap"></mdb-card-img>
+        <a>
+            <div class="mask"></div>
+        </a>
+    </div>
+    <!--Card content-->
+    <mdb-card-body>
+        <!--Title-->
+        <mdb-card-title>
+            <h4>{{ petProject.name }}</h4>
+        </mdb-card-title>
+
+        <!--Text-->
+        <mdb-card-text> {{ petProject.shortdescription }}
+        </mdb-card-text>
+
+        <a href="pet-projects/view/{{ petProject.name }}" mdbBtn color="primary" mdbWavesEffect>Start</a>
+    </mdb-card-body>
+</mdb-card>

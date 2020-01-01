@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProjectComponent } from './project.component';
+import { PetProjectListComponent } from './pet-project-list.component';
 
-describe('ProjectComponent', () => {
-  let component: ProjectComponent;
-  let fixture: ComponentFixture<ProjectComponent>;
+describe('ProjectListComponent', () => {
+  let component: PetProjectListComponent;
+  let fixture: ComponentFixture<PetProjectListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectComponent ]
+      declarations: [ PetProjectListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProjectComponent);
+    fixture = TestBed.createComponent(PetProjectListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
