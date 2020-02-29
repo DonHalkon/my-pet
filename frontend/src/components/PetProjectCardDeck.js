@@ -7,14 +7,11 @@ class PetProjectCardDeck extends Component {
     render() {
         return (
             <CardDeck>
-            {this.props.petProjects.map(petProject => (
-                <PetProjectCard 
-                    petProjectName={petProject.name}
-                    petProjectShortDescription={petProject.shortDescription}
-                    petProjectTask={petProject.task}
-                    detailedView={this.props.detailedView}
-                    key={petProject.id}
-                />
+                {this.props.petProjects.map(petProject => (
+                    <PetProjectCard
+                        petProject={petProject}
+                        key={petProject.id}
+                    />
                 ))}
             </CardDeck>
         )

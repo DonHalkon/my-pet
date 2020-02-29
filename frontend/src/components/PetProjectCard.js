@@ -1,24 +1,28 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
+import { Link } from "react-router-dom";
+import PetProjectPage from '../Pages/PetProjectPage';
 
 class PetProjectCard extends Component {
+
     render() {
         return (
             <Card>
-                <Card.Img variant="top" src="holder.js/100px160" />
+                <Card.Img variant="top" src="holder.js/50px80" />
                 <Card.Body>
-                    <Card.Title>{this.props.petProjectName}</Card.Title>
+                    <Card.Title><Link to={'/pet-projects/' + this.props.petProject.name}>{this.props.petProject.name}</Link></Card.Title>
+                    <Card.Title></Card.Title>
                     <Card.Text>
-                        {this.props.petProjectShortDescription}
+                        {this.props.petProject.shortDescription}
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                    <small className="text-muted">{this.props.petProjectTask}</small>
+                    <small className="text-muted">{this.props.petProject.task}</small>
                 </Card.Footer>
                 <Button variant="outline-primary" type="button"
-                    onClick={() => this.props.detailedView(this.props.petProjectName)}>Details</Button>
+                    onClick={() => this.props.detailedView(this.props.petProject.name)}>Details</Button>
+                
             </Card>
         )
     }
