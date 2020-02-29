@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+img {
+  opacity: 0.3;
+}
+
+.courseHeader {
+  width: 100%;
+  background-image: url(./img/course-header-background.jpg);
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  color: darkcyan;
+  min-height: 350px;
+  font-size: 5rem;
+  line-height: 5rem;
+}
+
+.shortDescription {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: xx-large;
+  font-style: italic;
+  text-align: center;
+}
