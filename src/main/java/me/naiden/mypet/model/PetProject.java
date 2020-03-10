@@ -1,14 +1,12 @@
 package me.naiden.mypet.model;
 
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import me.naiden.mypet.model.validation.Validation;
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "PET_PROJECTS")
 public class PetProject {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,17 +21,21 @@ public class PetProject {
 	private String task;
 	@Column
 	@ElementCollection
-	private List<String> tests;
+	private List<String> examples;
+	@Column
+	@ElementCollection
+	private List<Validation> validations;
 
 	public PetProject() {}
 
-	public PetProject(Long id, String name, String description, String shortDescription, String task, List<String> tests) {
+	public PetProject(Long id, String name, String description, String shortDescription, String task, List<Validation> validations, List<String> examples) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.shortDescription = shortDescription;
 		this.task = task;
-		this.tests = tests;
+		this.validations = validations;
+		this.examples = examples;
 	}
 
 	public Long getId() {
@@ -76,12 +78,19 @@ public class PetProject {
 		this.task = task;
 	}
 
-	public List<String> getTests() {
-		return tests;
+	public List<Validation> getValidations() {
+		return validations;
 	}
 
-	public void setTests(List<String> tests) {
-		this.tests = tests;
+	public void setValidations(List<Validation> validations) {
+		this.validations = validations;
 	}
 
+	public List<String> getExamples() {
+		return examples;
+	}
+
+	public void setExamples(List<String> examples) {
+		this.examples = examples;
+	}
 }

@@ -5,7 +5,8 @@ import { Row, Col } from 'react-bootstrap';
 import { MdDescription } from 'react-icons/md';
 import { GoTasklist } from 'react-icons/go';
 import { GiTestTubes } from 'react-icons/gi';
-import ListGroup from 'react-bootstrap/ListGroup'
+import { FaCode } from 'react-icons/fa';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 class PetProjectPage extends Component {
 
@@ -39,12 +40,25 @@ class PetProjectPage extends Component {
                         {this.props.petProject.task}</Col>
                 </Row>
                 <br />
+
+                <Row>
+                    <Col lg={{ span: 8, offset: 1 }}>
+                        <h4 className="font-weight-bold"><FaCode /> Examples</h4>
+                        <ListGroup as="ul">
+                            {this.props.petProject.examples.map(example => {
+                                return (<ListGroup.Item as="a">{example}</ListGroup.Item>);
+                            })}
+                        </ListGroup>
+
+                    </Col>
+                </Row>
+
                 <Row>
                     <Col lg={{ span: 8, offset: 1 }}>
                         <h4 className="font-weight-bold"><GiTestTubes /> Tests</h4>
                         <ListGroup as="ul">
-                            {this.props.petProject.tests.map(test => {
-                                return (<ListGroup.Item as="a">{test}</ListGroup.Item>);
+                            {this.props.petProject.validations.map(validation => {
+                                return (<ListGroup.Item as="a">{validation.expectedResult}</ListGroup.Item>);
                             })}
                         </ListGroup>
 
